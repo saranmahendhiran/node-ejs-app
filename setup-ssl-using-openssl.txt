@@ -1,0 +1,24 @@
+1. download and install openssl
+-> for windows follow this link https://slproweb.com/products/Win32OpenSSL.html
+
+2. write this command in you project
+-> openssl req -nodes -new -x509 -keyout server.key -out server.cert
+-> then answer the following questions
+Country Name (2 letter code) [AU]:IN
+State or Province Name (full name) [Some-State]:Tamil Nadu
+Locality Name (eg, city) []:Thiruvarur
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:saran pty ltd
+Organizational Unit Name (eg, section) []:section
+Common Name (e.g. server FQDN or YOUR name) []:localhost
+Email Address []:test@test.com
+-> i'll generate server.key and server.cert files
+
+3. if you want to setup in node then follow below steps
+const https = require('https');
+
+const privateKey = fs.readFileSync('server.key');
+const certificate = fs.readFileSync('server.cert');
+
+https
+  .createServer({ key: privateKey, cert: certificate }, app)
+  .listen(process.env.PORT || 3000);
